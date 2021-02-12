@@ -616,37 +616,45 @@ def _assert(condition, message):
 # Import most common subpackages
 ################################################################################
 
-import torch.cuda
-import torch.autograd
+# Use explicit redundant import to allow static type checkers to detect submodules
+
+from torch import cuda as cuda
+from torch import autograd as autograd
 from torch.autograd import no_grad, enable_grad, set_grad_enabled
-import torch.fft
-import torch.futures
-import torch.nn
-import torch.nn.intrinsic
-import torch.nn.quantizable
-import torch.nn.quantized
-import torch.optim
+from torch import fft as fft
+from torch import futures as futures
+from torch import nn as nn
+# import torch.nn.intrinsic # moved to torch.nn
+# import torch.nn.quantizable # moved to torch.nn
+# import torch.nn.quantized # moved to torch.nn
+from torch import optim as optim
+# import torch.optim._multi_tensor moved to torch.optim
+from torch import multiprocessing as multiprocessing
+from torch import sparse as sparse
+from torch import utils as utils
+# import torch.utils.backcompat # moved to torch.utils
+from torch import onnx as onnx
+from torch import jit as jit
+from torch import linalg as linalg
+from torch import hub as hub
+from torch import random as random
+from torch import distributions as distributions
+from torch import testing as testing
+from torch import backends as backends
+# import torch.backends.cuda # moved to torch.backends
+# import torch.backends.mkl # moved to torch.backends
+# import torch.backends.mkldnn # moved to torch.backends
+# import torch.backends.openmp # moved to torch.backends
+# import torch.backends.quantized # moved to torch.backends
+from torch import quantization as quantization
+import torch.utils.data # kept here to avoid recursive import of Tensor 
+
+# Kept private due to prefix.
 import torch.optim._multi_tensor
-import torch.multiprocessing
-import torch.sparse
-import torch.utils.backcompat
-import torch.onnx
-import torch.jit
-import torch.linalg
-import torch.hub
-import torch.random
-import torch.distributions
-import torch.testing
-import torch.backends.cuda
-import torch.backends.mkl
-import torch.backends.mkldnn
-import torch.backends.openmp
-import torch.backends.quantized
-import torch.quantization
-import torch.utils.data
 import torch.__config__
 import torch.__future__
-import torch.profiler
+
+from torch import profiler as profiler
 
 _C._init_names(list(torch._storage_classes))
 
@@ -665,7 +673,7 @@ from torch._ops import ops
 from torch._classes import classes
 
 # Import the quasi random sampler
-import torch.quasirandom
+from torch import quasirandom as quasirandom
 
 # If you are seeing this, it means that this call site was not checked if
 # the memory format could be preserved, and it was switched to old default

@@ -15,3 +15,10 @@ if sys.executable == "torch_deploy":
     cmake_prefix_path = None
 else:
     cmake_prefix_path = _osp.join(_osp.dirname(_osp.dirname(__file__)), 'share', 'cmake')
+
+
+# Re-export submodules
+
+from torch.utils import backcompat as backcompat
+# cannot export data , as this would cause recursive import
+# from torch.utils import data as data
